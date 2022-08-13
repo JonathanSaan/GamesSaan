@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function App() {
   return (
@@ -18,6 +18,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
