@@ -1,7 +1,6 @@
-import React, { ChangeEvent } from "react";
-import "./style.scss";
+import { Pagination as Paginate } from "@mui/material";
 
-import { Pagination as Paginate, Stack } from "@mui/material";
+import { ThePagination } from "./styles";
 
 interface Props {
   page: number;
@@ -11,13 +10,15 @@ interface Props {
 
 export const Pagination = ({ page, totalPage, paginate }: Props) => {
   return (
-    <Stack className="Pagination" sx={{ mt: { lg: "114px", xs: "70px" } }} >
+    <ThePagination>
       <Paginate
+        size="small"
+        color="primary"
         shape="rounded"
         defaultPage={page}
         count={totalPage}
         onChange={paginate}
       />
-    </Stack>
+    </ThePagination>
   );
 };

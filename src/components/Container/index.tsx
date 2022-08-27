@@ -1,15 +1,16 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
-import { Header } from "../../components/Header";
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+//import { Link } from "react-router-dom";
+
 import { RecentNews } from "../../components/RecentNews";
 import { Pagination } from "../../components/Pagination";
 import { Footer } from "../../components/Footer";
 import APIKey from "../../data/api";
-import "./style.scss";
+import { Home, News, DivOneNews, Title, Image, Paragraph } from "./styles";
 
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
 
 interface ResponseData {
   author: string;
@@ -36,19 +37,12 @@ export const Container = () => {
     window.scrollTo(0, 0);
     const load = async () => {
       const response = await axios.get(`https://newsapi.org/v2/everything?q=game&from=2022-08-23&to=2022-08-23&sortBy=popularity&apiKey=${APIKey}`);
-      setNews(response.data.articles.slice(0, 15))
+      console.log(response)
+      setNews(response.data.articles.slice(0, 15));
+      setTotalPage(response.data.totalResults);
     };
-    load()
+    load();
   }, [page]);
-  
-  const Btn = () => {
-    if (news.length === 0 ) {
-      console.log(news)
-      return console.log("nao funciona")
-    }
-      console.log(news)
-      return console.log("funciona")
-  }
   
   const paginate = (value: number) => {
     setPage(value);
@@ -60,17 +54,16 @@ export const Container = () => {
   
   return (
     <>
-      <Header/>
-      <div className="Container">
-        <div className="News">
+      <Home>
+        <News>
           {news.length === 0 && (
             <>
               {Array(15).fill(1).map((card, index) => (
-                <div className="OneNews">
+                <DivOneNews>
                   <Skeleton count={1} />
-                   <Skeleton className="Image" />
+                   <Skeleton className={Image} height={250} />
                   <Skeleton count={7} />
-                </div>
+                </DivOneNews>
               ))}
             </>
           )}
@@ -78,28 +71,27 @@ export const Container = () => {
           {news && (
             <>
               {news.map((OneNews) => (
-                <div className="OneNews">
-                  <h2 className="Title">{OneNews.title}</h2>
+                <DivOneNews>
+                  <Title>{OneNews.title}</Title>
                   {OneNews.urlToImage ? (
-                    <img className="Image" src={OneNews.urlToImage} alt={OneNews.title} />
+                    <Image src={OneNews.urlToImage} alt={OneNews.title} />
                     )
                       :
                     (
-                    <img className="Image" src={imageError} alt="imageError" />
+                    <Image src={imageError} alt="imageError" />
                   )}
-                  <p>{OneNews.description}</p>
-                </div>
+                  <Paragraph>{OneNews.description}</Paragraph>
+                </DivOneNews>
               ))}
             </>
           )}
-          <button onClick={Btn}>
-            click
-          </button>
-        
-        </div>
-        <Pagination page={page} totalPage={totalPage} paginate={paginate} />
+          
+          <Pagination page={page} totalPage={totalPage} paginate={paginate} />
+          
+          
+        </News>
         <RecentNews />
-      </div>
+      </Home>
       <Footer/>
     </>
   );

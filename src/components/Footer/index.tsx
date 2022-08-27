@@ -1,12 +1,12 @@
-import "./style.scss";
+import { Container } from "./styles";
 
 export const Footer = () => {
   
   return (
-    <footer>
+    <Container>
       <main>
         <p>&#169; 2022 - JonathanSaan</p>
       </main>
-    </footer>
+    </Container>
   );
 };

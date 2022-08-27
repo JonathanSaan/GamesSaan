@@ -1,14 +1,37 @@
-import "./style.scss";
-import { AiOutlineSearch } from "react-icons/ai";
+import React, { useContext } from "react";
+//import Switch from "react-switch";
+//import { shade } from 'polished';
+import { FormControlLabel, Switch } from "@mui/material";
+import { ThemeContext } from 'styled-components';
+import { Container, Nav, Title } from "./styles";
 
-export const Header = () => {
+interface Props {
+  toggleTheme(): void;
+}
+
+export const Header = ({ toggleTheme }: Props) => {
+  const { name } = useContext(ThemeContext);
   
   return (
-    <header>
-      <nav>
-        <h1>GamesSaan</h1>
-        <AiOutlineSearch size={32} />
-      </nav>
-    </header>
+    <Container>
+      <Nav>
+        <Title>GamesSaan</Title>
+        <FormControlLabel
+          sx={{
+            display: "block",
+          }}
+          control={
+            <Switch
+              checked={name === 'dark'}
+              onChange={toggleTheme}
+              name="loading"
+              color="primary"
+            />
+          }
+          label=""
+        />
+      </Nav>
+    </Container>
   );
 };
+              //onChange={() => setLoading(!loading)}
