@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-//import Switch from "react-switch";
-//import { shade } from 'polished';
+
 import { FormControlLabel, Switch } from "@mui/material";
 import { ThemeContext } from 'styled-components';
 import { Container, Nav, Title } from "./styles";
@@ -34,4 +33,3 @@ export const Header = ({ toggleTheme }: Props) => {
     </Container>
   );
 };
-              //onChange={() => setLoading(!loading)}

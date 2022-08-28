@@ -10,4 +10,8 @@ export const ThePagination = styled.div`
   padding: 0 1em;
   height: 4em;
   align-items: center;
+  
+  button, div {
+    color: ${(props) => props.theme.colors.textColor};
+  }
 `;

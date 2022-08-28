@@ -1,16 +1,14 @@
 import React from "react";
 
 import { ThemeProvider, DefaultTheme } from "styled-components";
-import usePeristedState from "./utils/usePersistedState";
 
+import usePeristedState from "./utils/usePersistedState";
 import light from "./styles/themes/light";
 import dark from "./styles/themes/dark";
 
 import GlobalStyle from "./styles/global";
 import { Header } from "./components/Header";
 import { Container } from "./components/Container";
-
-
 
 export const App = () => {
   const [theme, setTheme] = usePeristedState<DefaultTheme>('theme', light);
@@ -21,7 +19,7 @@ export const App = () => {
   };
   
   return (
-    <ThemeProvider theme={light}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Header toggleTheme={toggleTheme} />
       <Container />

@@ -25,27 +25,38 @@ export const DivOneNews = styled.div`
   width: 40em;
   max-width: 50em;
   
+  a {
+    text-decoration: none;
+  }
+  
   @media(max-width: 768px) {
     padding: 2em 1em;
     width: 100%;
   }
 `;
 
-export const Title = styled.h1`
-  font-size: 1em;
+export const Title = styled.a`
+  font-size: 1.3em;
+  font-weight: 600;
   color: ${(props) => props.theme.colors.textColor};
 `;
 
 export const Image = styled.img`
+  display: block;
   margin: 2em 0;
-  height: 20em;
+  border: 0;
+  height: 30vw;
   width: 100%;
   
   @media(max-width: 768px) {
-    height: 15em;
+    height: 50vw;
   }
 `;
 
 export const Paragraph  = styled.p`
   color: ${(props) => props.theme.colors.textColor};
+  
+  a {
+    margin: 0 0 0 .2em;
+  }
 `;

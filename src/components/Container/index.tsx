@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-//import { Link } from "react-router-dom";
 
 import { RecentNews } from "../../components/RecentNews";
-import { Pagination } from "../../components/Pagination";
+//import { Pagination } from "../../components/Pagination";
 import { Footer } from "../../components/Footer";
 import APIKey from "../../data/api";
 import { Home, News, DivOneNews, Title, Image, Paragraph } from "./styles";
@@ -72,21 +71,28 @@ export const Container = () => {
             <>
               {news.map((OneNews) => (
                 <DivOneNews>
-                  <Title>{OneNews.title}</Title>
+                  <Title href={OneNews.url}>
+                    {OneNews.title}
+                  </Title>
                   {OneNews.urlToImage ? (
-                    <Image src={OneNews.urlToImage} alt={OneNews.title} />
+                    <a href={OneNews.url}>
+                      <Image src={OneNews.urlToImage} alt={OneNews.title} />
+                    </a>
                     )
                       :
                     (
                     <Image src={imageError} alt="imageError" />
                   )}
-                  <Paragraph>{OneNews.description}</Paragraph>
+                  <Paragraph>
+                    {OneNews.description}
+                    <a href={OneNews.url}>
+                       Read more
+                    </a>
+                  </Paragraph>
                 </DivOneNews>
               ))}
             </>
           )}
-          
-          <Pagination page={page} totalPage={totalPage} paginate={paginate} />
           
           
         </News>
@@ -96,3 +102,4 @@ export const Container = () => {
     </>
   );
 };
+          //<Pagination page={page} totalPage={totalPage} paginate={paginate} />

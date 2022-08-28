@@ -17,8 +17,9 @@ export const Pagination = ({ page, totalPage, paginate }: Props) => {
         shape="rounded"
         defaultPage={page}
         count={totalPage}
-        onChange={paginate}
+        
       />
     </ThePagination>
   );
 };
+        //onChange={paginate}
