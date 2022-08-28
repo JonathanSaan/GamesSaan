@@ -20,7 +20,7 @@ export const DivOneNews = styled.div`
   background-color: ${(props) => props.theme.colors.primary};
   margin: 1em 0;
   padding: 2em;
-  min-height: 35em;
+  min-height: 38em;
   max-height: 45em;
   width: 40em;
   max-width: 50em;
@@ -43,8 +43,8 @@ export const Title = styled.a`
 
 export const Image = styled.img`
   display: block;
-  margin: 2em 0;
   border: 0;
+  margin: 2em 0;
   height: 30vw;
   width: 100%;
   

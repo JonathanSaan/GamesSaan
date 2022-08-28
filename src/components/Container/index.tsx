@@ -59,8 +59,21 @@ export const Container = () => {
             <>
               {Array(15).fill(1).map((card, index) => (
                 <DivOneNews>
-                  <Skeleton count={1} />
-                   <Skeleton className={Image} height={250} />
+                  <Skeleton 
+                    count={2}
+                    style={{
+                      height: "1.5em"
+                    }}
+                  />
+                  <Skeleton
+                    style={{
+                      margin: "2em 0",
+                      minHeight: "11em",
+                      height: "30vw",
+                      maxHeight: "30em",
+                      width: "100%",
+                    }}
+                  />
                   <Skeleton count={7} />
                 </DivOneNews>
               ))}
