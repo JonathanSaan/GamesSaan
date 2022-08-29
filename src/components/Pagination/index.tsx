@@ -5,7 +5,7 @@ import { ThePagination } from "./styles";
 interface Props {
   page: number;
   totalPage: any;
-  paginate: (value: number) => void;
+  paginate: (event: any, value: number) => void;
 }
 
 export const Pagination = ({ page, totalPage, paginate }: Props) => {
@@ -17,9 +17,8 @@ export const Pagination = ({ page, totalPage, paginate }: Props) => {
         shape="rounded"
         defaultPage={page}
         count={totalPage}
-        
+        onChange={paginate}
       />
     </ThePagination>
   );
 };
-        //onChange={paginate}

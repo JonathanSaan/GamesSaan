@@ -4,7 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import { RecentNews } from "../../components/RecentNews";
-//import { Pagination } from "../../components/Pagination";
+import { Pagination } from "../../components/Pagination";
 import { Footer } from "../../components/Footer";
 import APIKey from "../../data/api";
 import { Home, News, DivOneNews, Title, Image, Paragraph } from "./styles";
@@ -60,7 +60,7 @@ export const Container = () => {
     load();
   }, [page]);
   
-  const paginate = (value: number) => {
+  const paginate = (event: any, value: number) => {
     setPage(value);
     
     window.scrollTo({ top: 1600, behavior: "smooth" });
@@ -123,6 +123,7 @@ export const Container = () => {
               ))}
             </>
           )}
+          <Pagination page={page} totalPage={totalPage} paginate={paginate} />
           
           
         </News>
@@ -132,4 +133,3 @@ export const Container = () => {
     </>
   );
 };
-          //<Pagination page={page} totalPage={totalPage} paginate={paginate} />
