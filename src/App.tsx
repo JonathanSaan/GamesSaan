@@ -14,8 +14,7 @@ export const App = () => {
   const [theme, setTheme] = usePeristedState<DefaultTheme>('theme', light);
 
   const toggleTheme = () => {
-    setTheme(theme.name === 'light' ? dark : light)
-    console.log(theme)
+    setTheme(theme.name === 'light' ? dark : light);
   };
   
   return (

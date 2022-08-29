@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -13,16 +12,24 @@ import { Home, News, DivOneNews, Title, Image, Paragraph } from "./styles";
 
 interface ResponseData {
   author: string;
-  content: string;
-  description: string;
-  publishedAt: Date;
-  source: {
-    id: string;
-    name: string;
-  };
+  authors: string;
+  clean_url: string;
+  country: string;
+  excerpt: string;
+  is_opinion: boolean;
+  language: string;
+  link: string;
+  media: string;
+  published_date: string;
+  published_date_precision: string;
+  rank: number;
+  rights: string;
+  summary: string;
   title: string;
-  url: string;
-  urlToImage: string;
+  topic: string;
+  twitter_account: string;
+  _id: string;
+  _score: number;
 }
   
 export const Container = () => {
@@ -35,10 +42,20 @@ export const Container = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const load = async () => {
-      const response = await axios.get(`https://newsapi.org/v2/everything?q=game&from=2022-08-23&to=2022-08-23&sortBy=popularity&apiKey=${APIKey}`);
-      console.log(response)
-      setNews(response.data.articles.slice(0, 15));
-      setTotalPage(response.data.totalResults);
+      fetch(
+        `https://api.newscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=relevancy&page=${page}`,
+        {
+          headers: {
+            "x-api-key": `${APIKey}`,
+          },
+        }
+      )
+      .then((response) => response.json())
+      .then((result) => { 
+        console.log(result)
+        setNews(result.articles.slice(0, 15));
+        setTotalPage(result.total_pages);
+      })
     };
     load();
   }, [page]);
@@ -84,12 +101,12 @@ export const Container = () => {
             <>
               {news.map((OneNews) => (
                 <DivOneNews>
-                  <Title href={OneNews.url}>
+                  <Title href={OneNews.link}>
                     {OneNews.title}
                   </Title>
-                  {OneNews.urlToImage ? (
-                    <a href={OneNews.url}>
-                      <Image src={OneNews.urlToImage} alt={OneNews.title} />
+                  {OneNews.media ? (
+                    <a href={OneNews.link}>
+                      <Image src={OneNews.media} alt={OneNews.title} />
                     </a>
                     )
                       :
@@ -97,8 +114,8 @@ export const Container = () => {
                     <Image src={imageError} alt="imageError" />
                   )}
                   <Paragraph>
-                    {OneNews.description}
-                    <a href={OneNews.url}>
+                    {OneNews.summary}
+                    <a href={OneNews.link}>
                        Read more
                     </a>
                   </Paragraph>

@@ -1,3 +1,3 @@
-const APIKey : string | undefined = "6f6bd5b99ad04618b39e262853aa5b9a"
+const APIKey : string | undefined = "fgx1KfNHyOmX7PLdTpDwNwrTuYG9rAXHRi7xSzXqooY"
 
 export default APIKey;
