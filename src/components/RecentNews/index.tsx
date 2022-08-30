@@ -29,7 +29,6 @@ export const RecentNews = () => {
   const [recent, setRecent] = useState<ResponseData[]>([]);
   
   useEffect(() => {
-    window.scrollTo(0, 0);
     const load = async () => {
       fetch(
         `https://api.nnewscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=date&page=1`,
@@ -41,8 +40,7 @@ export const RecentNews = () => {
       )
       .then((response) => response.json())
       .then((result) => { 
-        console.log('oi')
-        console.log(result.articles)
+        console.log(result.articles);
         setRecent(result.articles.slice(0, 5));
       })
     };

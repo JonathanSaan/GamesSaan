@@ -40,10 +40,10 @@ export const Container = () => {
   
   
   useEffect(() => {
-    window.scrollTo(0, 0);
+    //window.scrollTo(0, 0);
     const load = async () => {
       fetch(
-        `https://api.newscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=relevancy&page=${page}`,
+        `https://api.newscatcherapi.com/v2/search?q=game&lang=en&sort_by=relevancy&page=${page}`,
         {
           headers: {
             "x-api-key": `${APIKey}`,
@@ -52,7 +52,6 @@ export const Container = () => {
       )
       .then((response) => response.json())
       .then((result) => { 
-        console.log(result)
         setNews(result.articles.slice(0, 15));
         setTotalPage(result.total_pages);
       })
@@ -63,7 +62,7 @@ export const Container = () => {
   const paginate = (event: any, value: number) => {
     setPage(value);
     
-    window.scrollTo({ top: 1600, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   
   const imageError: string = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXrkW7AqjOtp0k2zxOtF8hcWtF57v-UlyjSw&usqp=CAU";
@@ -79,7 +78,7 @@ export const Container = () => {
                   <Skeleton 
                     count={2}
                     style={{
-                      height: "1.5em"
+                      height: "1.3em"
                     }}
                   />
                   <Skeleton
@@ -124,8 +123,6 @@ export const Container = () => {
             </>
           )}
           <Pagination page={page} totalPage={totalPage} paginate={paginate} />
-          
-          
         </News>
         <RecentNews />
       </Home>
