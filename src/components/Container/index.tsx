@@ -38,24 +38,29 @@ export const Container = () => {
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<any>();
   
+  const load = async () => {
+    fetch(
+      `https://api.newscatcherapi.com/v2/search?q=game&lang=en&sort_by=relevancy&page=${page}`,
+      {
+        headers: {
+          "x-api-key": `${APIKey}`,
+        },
+      }
+    )
+    .then((response) => response.json())
+    .then((result) => {
+      setNews(result.articles.slice(0, 15));
+      setTotalPage(result.total_pages);
+    })
+  };
   
   useEffect(() => {
-    const load = async () => {
-      fetch(
-        `https://api.newscatcherapi.com/v2/search?q=game&lang=en&sort_by=relevancy&page=${page}`,
-        {
-          headers: {
-            "x-api-key": `${APIKey}`,
-          },
-        }
-      )
-      .then((response) => response.json())
-      .then((result) => {
-        setNews(result.articles.slice(0, 15));
-        setTotalPage(result.total_pages);
-      })
+    const timer = window.setInterval(() => {
+      load();
+    }, 1000);
+    return () => {
+      window.clearInterval(timer);
     };
-    load();
   }, [page]);
   
   const paginate = (event: any, value: number) => {

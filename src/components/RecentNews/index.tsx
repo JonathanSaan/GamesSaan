@@ -27,24 +27,29 @@ interface ResponseData {
 
 export const RecentNews = () => {
   const [recent, setRecent] = useState<ResponseData[]>([]);
+  const load = async () => {
+    fetch(
+      `https://api.newscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=date&page=1`,
+      {
+        headers: {
+          "x-api-key": `${APIKey}`,
+        },
+      }
+    )
+    .then((response) => response.json())
+    .then((result) => { 
+      console.log(result.articles);
+      setRecent(result.articles.slice(0, 5));
+    })
+  };
   
   useEffect(() => {
-    const load = async () => {
-      fetch(
-        `https://api.newscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=date&page=1`,
-        {
-          headers: {
-            "x-api-key": `${APIKey}`,
-          },
-        }
-      )
-      .then((response) => response.json())
-      .then((result) => { 
-        console.log(result.articles);
-        setRecent(result.articles.slice(0, 5));
-      })
+    const timer = window.setInterval(() => {
+      load();
+    }, 1000);
+    return () => {
+      window.clearInterval(timer);
     };
-    load();
   }, []);
   
   return (
