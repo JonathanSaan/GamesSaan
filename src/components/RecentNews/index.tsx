@@ -31,7 +31,7 @@ export const RecentNews = () => {
   useEffect(() => {
     const load = async () => {
       fetch(
-        `https://api.nnewscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=date&page=1`,
+        `https://api.newscatcherapi.com/v2/search?q=gaming&lang=en&sort_by=date&page=1`,
         {
           headers: {
             "x-api-key": `${APIKey}`,

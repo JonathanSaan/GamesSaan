@@ -40,7 +40,6 @@ export const Container = () => {
   
   
   useEffect(() => {
-    //window.scrollTo(0, 0);
     const load = async () => {
       fetch(
         `https://api.newscatcherapi.com/v2/search?q=game&lang=en&sort_by=relevancy&page=${page}`,
@@ -51,7 +50,7 @@ export const Container = () => {
         }
       )
       .then((response) => response.json())
-      .then((result) => { 
+      .then((result) => {
         setNews(result.articles.slice(0, 15));
         setTotalPage(result.total_pages);
       })
