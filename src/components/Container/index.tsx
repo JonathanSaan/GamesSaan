@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import axios from "axios";
 
 import { RecentNews } from "../../components/RecentNews";
 import { Pagination } from "../../components/Pagination";
@@ -31,7 +32,7 @@ interface ResponseData {
   _id: string;
   _score: number;
 }
-  
+
 export const Container = () => {
   const [news, setNews] = useState<ResponseData[]>([]);
   
@@ -105,11 +106,11 @@ export const Container = () => {
               {news.map((OneNews) => (
                 <DivOneNews>
                   <Title href={OneNews.link}>
-                    {OneNews.title}
+                    {OneNews.Title}
                   </Title>
                   {OneNews.media ? (
                     <a href={OneNews.link}>
-                      <Image src={OneNews.media} alt={OneNews.title} />
+                      <Image src={OneNews.media} alt={OneNews.Title} />
                     </a>
                     )
                       :
