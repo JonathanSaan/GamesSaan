@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import axios from "axios";
 
 import { RecentNews } from "../../components/RecentNews";
 import { Pagination } from "../../components/Pagination";
@@ -106,11 +105,11 @@ export const Container = () => {
               {news.map((OneNews) => (
                 <DivOneNews>
                   <Title href={OneNews.link}>
-                    {OneNews.Title}
+                    {OneNews.title}
                   </Title>
                   {OneNews.media ? (
                     <a href={OneNews.link}>
-                      <Image src={OneNews.media} alt={OneNews.Title} />
+                      <Image src={OneNews.media} alt={OneNews.title} />
                     </a>
                     )
                       :
