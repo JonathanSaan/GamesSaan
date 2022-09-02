@@ -21,7 +21,8 @@ export const DivOneNews = styled.div`
   margin: 1em 0;
   padding: 2em;
   min-height: 38em;
-  max-height: 45em;
+  height: auto;
+  max-height: 50em;
   width: 40em;
   max-width: 50em;
   
