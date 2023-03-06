@@ -36,13 +36,13 @@ export const RecentNews = () => {
         },
       }
     )
-    .then((response) => response.json())
-    .then((result) => { 
-      console.log(result.articles);
-      setRecent(result.articles.slice(0, 5));
-    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result.articles);
+        setRecent(result.articles.slice(0, 5));
+      });
   };
-  
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       load();
@@ -51,12 +51,10 @@ export const RecentNews = () => {
       window.clearInterval(timer);
     };
   }, []);
-  
+
   return (
     <TheRecentNews>
-      <Title>
-        Recent News
-      </Title>
+      <Title>Recent News</Title>
       <ul>
         {recent.map((data) => (
           <TitleNews>

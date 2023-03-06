@@ -11,12 +11,12 @@ import { Header } from "./components/Header";
 import { Container } from "./components/Container";
 
 export const App = () => {
-  const [theme, setTheme] = usePeristedState<DefaultTheme>('theme', light);
+  const [theme, setTheme] = usePeristedState<DefaultTheme>("theme", light);
 
   const toggleTheme = () => {
-    setTheme(theme.name === 'light' ? dark : light);
+    setTheme(theme.name === "light" ? dark : light);
   };
-  
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

@@ -9,7 +9,6 @@ import { Footer } from "../../components/Footer";
 import APIKey from "../../data/api";
 import { Home, News, DivOneNews, Title, Image, Paragraph } from "./styles";
 
-
 interface ResponseData {
   author: string;
   authors: string;
@@ -34,10 +33,10 @@ interface ResponseData {
 
 export const Container = () => {
   const [news, setNews] = useState<ResponseData[]>([]);
-  
+
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<any>();
-  
+
   const load = async () => {
     fetch(
       `https://api.newscatcherapi.com/v2/search?q=game&lang=en&sort_by=relevancy&page=${page}`,
@@ -47,13 +46,13 @@ export const Container = () => {
         },
       }
     )
-    .then((response) => response.json())
-    .then((result) => {
-      setNews(result.articles.slice(0, 15));
-      setTotalPage(result.total_pages);
-    })
+      .then((response) => response.json())
+      .then((result) => {
+        setNews(result.articles.slice(0, 15));
+        setTotalPage(result.total_pages);
+      });
   };
-  
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       load();
@@ -62,65 +61,62 @@ export const Container = () => {
       window.clearInterval(timer);
     };
   }, [page]);
-  
+
   const paginate = (event: any, value: number) => {
     setPage(value);
-    
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-  
-  const imageError: string = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXrkW7AqjOtp0k2zxOtF8hcWtF57v-UlyjSw&usqp=CAU";
-  
+
+  const imageError: string =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXrkW7AqjOtp0k2zxOtF8hcWtF57v-UlyjSw&usqp=CAU";
+
   return (
     <>
       <Home>
         <News>
           {news.length === 0 && (
             <>
-              {Array(15).fill(1).map((card, index) => (
-                <DivOneNews>
-                  <Skeleton 
-                    count={2}
-                    style={{
-                      height: "1.3em"
-                    }}
-                  />
-                  <Skeleton
-                    style={{
-                      margin: "2em 0",
-                      minHeight: "11em",
-                      height: "30vw",
-                      maxHeight: "30em",
-                      width: "100%",
-                    }}
-                  />
-                  <Skeleton count={7} />
-                </DivOneNews>
-              ))}
+              {Array(15)
+                .fill(1)
+                .map((card, index) => (
+                  <DivOneNews>
+                    <Skeleton
+                      count={2}
+                      style={{
+                        height: "1.3em",
+                      }}
+                    />
+                    <Skeleton
+                      style={{
+                        margin: "2em 0",
+                        minHeight: "11em",
+                        height: "30vw",
+                        maxHeight: "30em",
+                        width: "100%",
+                      }}
+                    />
+                    <Skeleton count={7} />
+                  </DivOneNews>
+                ))}
             </>
           )}
-          
+
           {news && (
             <>
               {news.map((OneNews) => (
                 <DivOneNews>
-                  <Title href={OneNews.link}>
-                    {OneNews.title}
-                  </Title>
+                  <Title href={OneNews.link}>{OneNews.title}</Title>
                   {OneNews.media ? (
                     <a href={OneNews.link}>
                       <Image src={OneNews.media} alt={OneNews.title} />
                     </a>
-                    )
-                      :
-                    (
+                  ) : (
                     <Image src={imageError} alt="imageError" />
                   )}
                   <Paragraph>
                     {OneNews.summary}
-                    <a href={OneNews.link}>
-                       Read more
-                    </a>
+                    <a href={OneNews.link}>Read more</a>
                   </Paragraph>
                 </DivOneNews>
               ))}
@@ -130,7 +126,7 @@ export const Container = () => {
         </News>
         <RecentNews />
       </Home>
-      <Footer/>
+      <Footer />
     </>
   );
 };

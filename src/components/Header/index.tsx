@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 import { FormControlLabel, Switch } from "@mui/material";
-import { ThemeContext } from 'styled-components';
+import { ThemeContext } from "styled-components";
 import { Container, Nav, Title } from "./styles";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 export const Header = ({ toggleTheme }: Props) => {
   const { name } = useContext(ThemeContext);
-  
+
   return (
     <Container>
       <Nav>
@@ -21,7 +21,7 @@ export const Header = ({ toggleTheme }: Props) => {
           }}
           control={
             <Switch
-              checked={name === 'dark'}
+              checked={name === "dark"}
               onChange={toggleTheme}
               name="loading"
               color="primary"
